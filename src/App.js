@@ -1,25 +1,34 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState } from 'react';
+import Search from './pages/Search';
+import User from './pages/User';
+import { Routes, Route } from 'react-router-dom';
+import './style/index.css';
 
 function App() {
+  const [user, setUser] = useState(null);
+  const [username, setUsername] = useState(null);
+
+  // Callback function to receive the fetched user information
+  const handleUserFetch = (userData, usernameData) => {
+    setUser(userData);
+    setUsername(usernameData);
+  };
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <>
+      <Routes>
+        <Route
+          exact path="/"
+          element={ <Search onUserFetch={handleUserFetch} />}
+        />
+        <Route
+           exact path="/github-finder/user/:username"
+          element={<User user={user} />}
+          />
+        </Routes>
+    </>
+  )
+};
 
 export default App;
