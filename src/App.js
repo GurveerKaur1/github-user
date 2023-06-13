@@ -23,7 +23,7 @@ function App() {
           element={ <Search onUserFetch={handleUserFetch} />}
         />
         <Route
-           exact path="/github-finder/user/:username"
+           exact path="/user/:username"
           element={<User user={user} />}
           />
         </Routes>
